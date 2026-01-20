@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>FoodHub – Pizza Palace</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
+      body {
+        background: #f7f7f7;
+        color: #222;
+      }
+      .container {
+        width: 90%;
+        margin: auto;
+      }
+
+      /* HEADER */
+      header {
+        background: #fff;
+        border-bottom: 1px solid #ddd;
+        padding: 15px 0;
+      }
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      nav ul {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+      }
+      nav ul li {
+        cursor: pointer;
+      }
+
+      /* RESTAURANT INFO */
+      .restaurant-header {
+        background: #fff;
+        padding: 25px;
+        margin-top: 20px;
+        border-radius: 8px;
+      }
+      .back {
+        color: #555;
+        font-size: 14px;
+        cursor: pointer;
+      }
+      .restaurant-title {
+        margin-top: 10px;
+      }
+      .restaurant-meta {
+        color: #777;
+        font-size: 14px;
+        margin-top: 5px;
+      }
+
+      /* TABS */
+      .tabs {
+        display: flex;
+        gap: 20px;
+        margin: 25px 0;
+        font-size: 14px;
+      }
+      .tabs span {
+        cursor: pointer;
+        color: #555;
+      }
+      .tabs span.active {
+        font-weight: bold;
+        color: #000;
+      }
+
+      /* ITEMS */
+      .section-title {
+        margin-bottom: 15px;
+      }
+      .items {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+      }
+      .item {
+        background: #fff;
+        border-radius: 10px;
+        display: flex;
+        overflow: hidden;
+      }
+      .item img {
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+      }
+      .item-content {
+        padding: 15px;
+        flex: 1;
+      }
+      .item-content h4 {
+        margin-bottom: 5px;
+      }
+      .item-content p {
+        font-size: 13px;
+        color: #777;
+      }
+      .price {
+        margin: 10px 0;
+        font-weight: bold;
+      }
+
+      /* BUTTON */
+      .btn {
+        background: #e53935;
+        color: #fff;
+        border: none;
+        padding: 8px 14px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="container">
+        <nav>
+          <h2>FoodHub</h2>
+          <ul>
+            <li>Home</li>
+            <li>Restaurants</li>
+            <li>Profile</li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <div class="container">
+      <!-- RESTAURANT HEADER -->
+      <div class="restaurant-header">
+        <div class="back">← Back to restaurants</div>
+        <div class="restaurant-title">
+          <h2>Pizza Palace</h2>
+          <div class="restaurant-meta">
+            Italian, Pizza &nbsp;&nbsp; ⭐ 4.7 &nbsp;&nbsp; ⏱ 20–30 min
+          </div>
+        </div>
+      </div>
+
+      <!-- TABS -->
+      <div class="tabs">
+        <span class="active">Popular</span>
+        <span>Pizza</span>
+        <span>Pasta</span>
+        <span>Sides</span>
+        <span>Salads</span>
+        <span>Desserts</span>
+        <span>Drinks</span>
+      </div>
+
+      <!-- ITEMS -->
+      <h3 class="section-title">Popular Items</h3>
+
+      <div class="items">
+        <div class="item">
+          <img
+            src="https://images.unsplash.com/photo-1604382354936-07c5d9983bd3"
+          />
+          <div class="item-content">
+            <h4>Margherita Pizza</h4>
+            <p>Classic tomato sauce, mozzarella cheese, fresh basil</p>
+            <div class="price">$12.99</div>
+            <button class="btn" onclick="addToCart()">Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="item">
+          <img
+            src="https://images.unsplash.com/photo-1593560708920-61dd98c46a4e"
+          />
+          <div class="item-content">
+            <h4>Pepperoni Pizza</h4>
+            <p>Tomato sauce, mozzarella cheese, pepperoni slices</p>
+            <div class="price">$14.99</div>
+            <button class="btn" onclick="addToCart()">Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="item">
+          <img
+            src="https://product-assets.faasos.io/production/product/image_1658295882915_Veggie_Supreme_Pizza_Medium_.jpg"
+          />
+          <div class="item-content">
+            <h4>Veggie Supreme</h4>
+            <p>Bell peppers, onions, mushrooms, olives</p>
+            <div class="price">$15.99</div>
+            <button class="btn" onclick="addToCart()">Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="item">
+          <img
+            src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9"
+          />
+          <div class="item-content">
+            <h4>Chicken Alfredo</h4>
+            <p>Creamy alfredo sauce, grilled chicken</p>
+            <div class="price">$13.99</div>
+            <button class="btn" onclick="addToCart()">Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="item">
+          <img
+            src="https://www.madamrecipe.com/wp-content/uploads/2020/10/garlic-bread-recipe-cheesy-garlic-bread-recipe-garlic-cheese-bread-35-1024x7691-1-800x769.jpeg"
+          />
+          <div class="item-content">
+            <h4>Garlic Breadsticks</h4>
+            <p>Fresh baked breadsticks with garlic butter</p>
+            <div class="price">$6.99</div>
+            <button class="btn" onclick="addToCart()">Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="item">
+          <img
+            src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe"
+          />
+          <div class="item-content">
+            <h4>Caesar Salad</h4>
+            <p>Romaine lettuce, croutons, parmesan cheese</p>
+            <div class="price">$8.99</div>
+            <button class="btn" onclick="addToCart()">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function addToCart() {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        cart.push("item");
+        localStorage.setItem("cart", JSON.stringify(cart));
+        alert("Item added to cart");
+      }
+    </script>
+  </body>
+</html>

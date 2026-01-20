@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>FoodHub</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Poppins, Arial;
+      }
+      body {
+        background: linear-gradient(120deg, #ffecd2, #fcb69f);
+        min-height: 100vh;
+      }
+      .container {
+        width: 90%;
+        margin: auto;
+      }
+      .page {
+        display: none;
+      }
+      .page.active {
+        display: block;
+      }
+
+      /* HEADER */
+      header {
+        background: #fff;
+        padding: 15px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      nav ul {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+      }
+      nav li {
+        cursor: pointer;
+        font-weight: 500;
+      }
+
+      /* BUTTON */
+      .btn {
+        background: #ff5722;
+        color: #fff;
+        border: none;
+        padding: 10px 16px;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+
+      /* LOGIN */
+      .login-box {
+        max-width: 380px;
+        background: #fff;
+        margin: 90px auto;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      }
+      .login-box h2 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      .login-box input {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+      }
+
+      /* SEARCH */
+      .search-bar {
+        margin: 20px 0;
+      }
+      .search-bar input {
+        width: 100%;
+        padding: 12px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+      }
+
+      /* CATEGORIES */
+      .categories {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+      .categories span {
+        background: #fff;
+        padding: 8px 14px;
+        border-radius: 20px;
+        cursor: pointer;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      /* GRID */
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 20px;
+      }
+      .card {
+        background: #fff;
+        border-radius: 12px;
+        overflow: hidden;
+        cursor: pointer;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+      .card img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+      }
+      .card-content {
+        padding: 15px;
+      }
+
+      /* MENU */
+      .item {
+        background: #fff;
+        padding: 15px;
+        border-radius: 12px;
+        display: flex;
+        gap: 15px;
+        margin-bottom: 15px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+      }
+      .item img {
+        width: 90px;
+        height: 90px;
+        border-radius: 10px;
+        object-fit: cover;
+      }
+
+      /* CART */
+      .cart-item {
+        background: #fff;
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      /* PAYMENT */
+      .payment-box {
+        max-width: 400px;
+        background: #fff;
+        margin: 80px auto;
+        padding: 25px;
+        border-radius: 12px;
+      }
+      .payment-box input {
+        width: 100%;
+        padding: 12px;
+        margin: 10px 0;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="container">
+        <nav>
+          <h2>🍔 FoodHub</h2>
+          <ul>
+            <li onclick="showPage('home')">Home</li>
+            <li onclick="openCart()">Cart</li>
+            <li onclick="logout()">Logout</li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- LOGIN PAGE -->
+    <div id="login" class="page active">
+      <div class="login-box">
+        <h2>Login to FoodHub</h2>
+        <input id="username" placeholder="Enter Username" />
+        <input id="password" type="password" placeholder="Enter Password" />
+        <button class="btn" onclick="login()">Login</button>
+      </div>
+    </div>
+
+    <!-- HOME PAGE -->
+    <div id="home" class="page container">
+      <div class="search-bar">
+        <input placeholder="Search food or restaurant" />
+      </div>
+
+      <!-- 12+ CATEGORIES -->
+      <div class="categories">
+        <span>Pizza</span>
+        <span>Burgers</span>
+        <span>Biryani</span>
+        <span>South Indian</span>
+        <span>North Indian</span>
+        <span>Chinese</span>
+        <span>Italian</span>
+        <span>Arabian</span>
+        <span>BBQ</span>
+        <span>Sea Food</span>
+        <span>Desserts</span>
+        <span>Beverages</span>
+      </div>
+
+      <!-- FOOD ITEMS SECTION -->
+      <h2 style="margin: 25px 0">Popular Food Items</h2>
+
+      <div class="grid">
+        <div class="card">
+          <img
+            src="https://images.unsplash.com/photo-1604382354936-07c5d9983bd3"
+          />
+          <div class="card-content">
+            <h4>Margherita Pizza</h4>
+            <p>₹299</p>
+            <button class="btn" onclick="addToCart('Margherita Pizza', 299)">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+
+        <div class="card">
+          <img
+            src="https://images.unsplash.com/photo-1593560708920-61dd98c46a4e"
+          />
+          <div class="card-content">
+            <h4>Pepperoni Pizza</h4>
+            <p>₹399</p>
+            <button class="btn" onclick="addToCart('Pepperoni Pizza', 399)">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+
+        <div class="card">
+          <img
+            src="https://images.unsplash.com/photo-1550547660-d9450f859349"
+          />
+          <div class="card-content">
+            <h4>Cheese Burger</h4>
+            <p>₹199</p>
+            <button class="btn" onclick="addToCart('Cheese Burger', 199)">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+
+        <div class="card">
+          <img
+            src="https://tse4.mm.bing.net/th/id/OIP.Ahh061xpsLYMAxrf5v7NCQHaEK?pid=Api&P=0&h=180"
+          />
+          <div class="card-content">
+            <h4>Chicken Biryani</h4>
+            <p>₹249</p>
+            <button class="btn" onclick="addToCart('Chicken Biryani', 249)">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+
+        <div class="card">
+          <img
+            src="https://images.unsplash.com/photo-1589302168068-964664d93dc0"
+          />
+          <div class="card-content">
+            <h4>Masala Dosa</h4>
+            <p>₹120</p>
+            <button class="btn" onclick="addToCart('Masala Dosa', 120)">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+
+        <div class="card">
+          <img
+            src="https://images.unsplash.com/photo-1617196034183-421b4917c92d"
+          />
+          <div class="card-content">
+            <h4>Fried Chicken</h4>
+            <p>₹299</p>
+            <button class="btn" onclick="addToCart('Fried Chicken', 299)">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+
+        <div class="card">
+          <img
+            src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092"
+          />
+          <div class="card-content">
+            <h4>Grill Chicken BBQ</h4>
+            <p>₹349</p>
+            <button class="btn" onclick="addToCart('Grill Chicken BBQ', 349)">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+
+        <div class="card">
+          <img
+            src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c"
+          />
+          <div class="card-content">
+            <h4>Chocolate Dessert</h4>
+            <p>₹149</p>
+            <button class="btn" onclick="addToCart('Chocolate Dessert', 149)">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CART PAGE -->
+    <div id="cart" class="page container">
+      <h2>Your Cart</h2>
+      <div id="cartItems"></div>
+      <h3 id="total"></h3>
+      <button class="btn" onclick="showPage('payment')">
+        Proceed to Payment
+      </button>
+    </div>
+
+    <!-- PAYMENT PAGE -->
+    <div id="payment" class="page">
+      <div class="payment-box">
+        <h2>Payment</h2>
+        <input placeholder="Card Number" />
+        <input placeholder="Expiry Date" />
+        <input placeholder="CVV" />
+        <button class="btn" onclick="confirmOrder()">Pay & Order</button>
+      </div>
+    </div>
+
+    <!-- CONFIRM PAGE -->
+    <div
+      id="confirm"
+      class="page container"
+      style="text-align: center; margin-top: 100px"
+    >
+      <h2>🎉 Order Confirmed</h2>
+      <p id="confirmMsg"></p>
+      <button class="btn" onclick="showPage('home')">Back to Home</button>
+    </div>
+
+    <script>
+      let cart = [];
+      let user = "";
+
+      function showPage(id) {
+        document
+          .querySelectorAll(".page")
+          .forEach((p) => p.classList.remove("active"));
+        document.getElementById(id).classList.add("active");
+      }
+
+      function login() {
+        let u = document.getElementById("username").value;
+        let p = document.getElementById("password").value;
+        if (u && p) {
+          user = u;
+          showPage("home");
+        } else {
+          alert("Enter valid username & password");
+        }
+      }
+
+      function logout() {
+        cart = [];
+        user = "";
+        showPage("login");
+      }
+
+      function addToCart(name, price) {
+        cart.push({ name, price });
+        alert("Item added to cart");
+      }
+
+      function openCart() {
+        let html = "";
+        let total = 0;
+        cart.forEach((i) => {
+          html += `<div class="cart-item"><span>${i.name}</span><span>₹${i.price}</span></div>`;
+          total += i.price;
+        });
+        document.getElementById("cartItems").innerHTML = html;
+        document.getElementById("total").innerText = "Total: ₹" + total;
+        showPage("cart");
+      }
+
+      function confirmOrder() {
+        document.getElementById("confirmMsg").innerText =
+          "Thank you " + user + "! Your order will be delivered soon 🚚";
+        cart = [];
+        showPage("confirm");
+      }
+    </script>
+  </body>
+</html>
